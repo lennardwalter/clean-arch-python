@@ -1,0 +1,4 @@
+pyright
+pydantic
+fastapi
+di[anyio]
