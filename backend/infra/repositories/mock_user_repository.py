@@ -18,7 +18,7 @@ class MockUserRepository(UserRepository, MockBaseRepository[User]):
                 User(
                     id=UUID("f5f4b3b4-3b4b-4b3b-b43b-4b3b4b3b4b3b"),
                     email="test@example.com",
-                    password="aB1!ksfdjkd",
+                    hashed_password="$2b$12$uQ87CZvsyju3tA9YxVpwI.2BcexSTlgtq9uYqCb1Vm/smxJytyxBG",  # Testpassword!1
                 )
             ]
         )

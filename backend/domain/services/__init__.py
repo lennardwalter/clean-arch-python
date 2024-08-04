@@ -1,6 +1,7 @@
 from .user_service import UserService
+from .todo_service import TodoService
 
 
-SERVICES = [UserService]
+SERVICES = [UserService, TodoService]
 
-__all__ = ["SERVICES", "UserService"]
+__all__ = ["SERVICES", "UserService", "TodoService"]

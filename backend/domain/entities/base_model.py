@@ -1,10 +1,9 @@
-from pydantic import BaseModel as PydanticBaseModel
+from uuid import uuid4
 
-from domain.extra.types import UUID4
+from pydantic import Field
+
+from domain.extra.types import UUID4, BaseModelConfig
 
 
-class BaseModel(PydanticBaseModel):
-    id: UUID4
-
-    class Config:
-        regex_engine = "python-re"
+class EntityBaseModel(BaseModelConfig):
+    id: UUID4 = Field(default_factory=uuid4)

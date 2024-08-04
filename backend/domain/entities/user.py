@@ -1,8 +1,8 @@
-from domain.extra.types import EmailStr, PasswordStr
+from domain.extra.types import EmailStr
 
-from .base_model import BaseModel
+from .base_model import EntityBaseModel
 
 
-class User(BaseModel):
+class User(EntityBaseModel):
     email: EmailStr
-    password: PasswordStr
+    hashed_password: str

@@ -1,4 +1,6 @@
 pyright
 pydantic
-fastapi
+fastapi[standard]
 di[anyio]
+pyjwt
+passlib

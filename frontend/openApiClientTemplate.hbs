@@ -1,0 +1,123 @@
+import { makeApi, Zodios, type ZodiosInstance, type ZodiosPlugin } from '@zodios/core';
+import { z } from 'zod';
+import type { LoadEvent } from '@sveltejs/kit';
+import Cookies from 'js-cookie';
+
+{{#if imports}}
+{{#each imports}}
+import { {{{@key}}} } from "./{{{this}}}"
+{{/each}}
+{{/if}}
+
+
+{{#if types}}
+{{#each types}}
+{{{this}}};
+{{/each}}
+{{/if}}
+
+{{#each schemas}}
+const {{@key}}{{#if (lookup ../emittedType @key)}}: z.ZodType<{{@key}}>{{/if}} = {{{this}}};
+{{/each}}
+
+{{#ifNotEmptyObj schemas}}
+export const schemas = {
+{{#each schemas}}
+	{{@key}},
+{{/each}}
+};
+{{/ifNotEmptyObj}}
+
+const endpoints = makeApi([
+{{#each endpoints}}
+	{
+		method: "{{method}}",
+		path: "{{path}}",
+		{{#if @root.options.withAlias}}
+		{{#if alias}}
+		alias: "{{alias}}",
+		{{/if}}
+		{{/if}}
+		{{#if description}}
+		description: `{{description}}`,
+		{{/if}}
+		{{#if requestFormat}}
+		requestFormat: "{{requestFormat}}",
+		{{/if}}
+		{{#if parameters}}
+		parameters: [
+			{{#each parameters}}
+			{
+				name: "{{name}}",
+				{{#if description}}
+				description: `{{description}}`,
+				{{/if}}
+				{{#if type}}
+				type: "{{type}}",
+				{{/if}}
+				schema: {{{schema}}}
+			},
+			{{/each}}
+		],
+		{{/if}}
+		response: {{{response}}},
+		{{#if errors.length}}
+		errors: [
+			{{#each errors}}
+			{
+				{{#ifeq status "default" }}
+				status: "default",
+				{{else}}
+				status: {{status}},
+				{{/ifeq}}
+				{{#if description}}
+				description: `{{description}}`,
+				{{/if}}
+				schema: {{{schema}}}
+			},
+			{{/each}}
+		]
+		{{/if}}
+	},
+{{/each}}
+]);
+
+
+// inject into load function
+export function injectApi<T>(
+	wrapped: (event: LoadEvent & { api: ZodiosInstance<typeof endpoints> }) => T
+) {
+	return (event: LoadEvent) => {
+		let token;
+		// @ts-expect-error
+		if (event.cookies) {
+			// @ts-expect-error
+			token = event.cookies.get('token');
+		} else {
+			token = Cookies.get('token');
+		}
+
+		const api = new Zodios('http://127.0.0.1:8000', endpoints, {
+			axiosConfig: {
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			}
+		});
+		return wrapped({ ...event, api });
+	};
+}
+
+export const client = new Zodios('http://127.0.0.1:8000', endpoints);
+client.use({
+	request: async (api, config) => {
+		const token = Cookies.get('token') || '';
+		return {
+			...config,
+			headers: {
+				...config.headers,
+				Authorization: `Bearer ${token}`
+			}
+		};
+	}
+});

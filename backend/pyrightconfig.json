@@ -1,4 +1,5 @@
 {
     "typeCheckingMode": "strict",
+    "useLibraryCodeForTypes": true,
     "include": ["app", "domain", "infra"]
 }

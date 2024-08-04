@@ -1,8 +1,11 @@
+from .base_model import EntityBaseModel
+
 from .user import User
-from .base_model import BaseModel
+from .todo import Todo
 
 
 __all__ = [
+    "EntityBaseModel",
     "User",
-    "BaseModel",
+    "Todo",
 ]

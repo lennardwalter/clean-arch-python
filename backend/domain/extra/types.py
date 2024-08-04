@@ -1,16 +1,9 @@
-from typing import Annotated
-
-from pydantic import StringConstraints, EmailStr, UUID4
-
-PasswordStr = Annotated[
-    str,
-    StringConstraints(
-        min_length=8,
-        max_length=50,
-        # at least one lowercase, one uppercase, one digit, one special character
-        pattern=r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).*$",
-    ),
-]
+from pydantic import EmailStr, UUID4, BaseModel as PydanticBaseModel
 
 
-__all__ = ["EmailStr", "PasswordStr", "UUID4"]
+class BaseModelConfig(PydanticBaseModel):
+    class Config:
+        regex_engine = "python-re"
+
+
+__all__ = ["EmailStr", "UUID4"]

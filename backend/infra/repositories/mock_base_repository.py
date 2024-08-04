@@ -1,12 +1,12 @@
 from domain.ports.repositories import BaseRepository, RepositoryError
 
-from domain.entities import BaseModel
+from domain.entities import EntityBaseModel
 
 from domain.extra.types import UUID4
 from domain.extra.result import *
 
 
-class MockBaseRepository[T: BaseModel](BaseRepository[T]):
+class MockBaseRepository[T: EntityBaseModel](BaseRepository[T]):
 
     def __init__(self, entities: list[T] = []) -> None:
         self._entities = entities
@@ -21,10 +21,19 @@ class MockBaseRepository[T: BaseModel](BaseRepository[T]):
         return Ok(self._entities)
 
     async def create(self, entity: T) -> Result[T, RepositoryError]:
-        raise NotImplementedError
+        self._entities.append(entity)
+        return Ok(entity)
 
     async def update(self, entity: T) -> Result[T, RepositoryError]:
-        raise NotImplementedError
+        for i, e in enumerate(self._entities):
+            if e.id == entity.id:
+                self._entities[i] = entity
+                return Ok(entity)
+        return Err("Entity not found")
 
-    async def delete(self, entity: T) -> Result[None, RepositoryError]:
-        raise NotImplementedError
+    async def delete(self, id: UUID4) -> Result[None, RepositoryError]:
+        for i, entity in enumerate(self._entities):
+            if entity.id == id:
+                del self._entities[i]
+                return Ok(None)
+        return Err("Entity not found")
