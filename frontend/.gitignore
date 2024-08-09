@@ -28,3 +28,5 @@ vite.config.ts.timestamp-*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+src/lib/_api_generated.ts

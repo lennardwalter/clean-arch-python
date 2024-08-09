@@ -1,7 +1,7 @@
 import type { LoadEvent } from '@sveltejs/kit';
 
 import Cookies from 'js-cookie';
-import { Zodios, type ZodiosInstance } from '@zodios/core';
+import { Zodios, type ZodiosInstance, type ZodiosPlugin } from '@zodios/core';
 import { pluginFetch } from '@zodios/plugins';
 
 import { browser } from '$app/environment';
@@ -11,7 +11,7 @@ export { schemas };
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
-const addTokenFromCookiesPlugin = {
+const addTokenFromCookiesPlugin: ZodiosPlugin = {
 	request: async (api, config) => {
 		const token = Cookies.get('token') || '';
 		return {
