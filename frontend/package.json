@@ -40,6 +40,7 @@
 	"packageManager": "yarn@4.4.0",
 	"dependencies": {
 		"@zodios/core": "^10.9.6",
+		"@zodios/plugins": "^10.6.0",
 		"axios": "^1.7.3",
 		"bits-ui": "^0.21.13",
 		"clsx": "^2.1.1",

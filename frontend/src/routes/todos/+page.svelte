@@ -3,7 +3,7 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Input } from '$lib/components/ui/input';
 
-	import { client } from '$lib/api';
+	import { getApi } from '$lib/api';
 
 	const { data } = $props();
 
@@ -13,7 +13,7 @@
 	let newTodoText = $state('');
 
 	async function createTodo() {
-		const todo = await client.createTodo({
+		const todo = await getApi().createTodo({
 			text: newTodoText
 		});
 		todos.push(todo);
@@ -21,14 +21,14 @@
 	}
 
 	async function remove(id: string) {
-		await client.deleteTodo(undefined, { params: { todo_id: id } });
+		await getApi().deleteTodo(undefined, { params: { todo_id: id } });
 		todos = todos.filter((todo) => todo.id !== id);
 	}
 
 	async function toggleComplete(id: string) {
 		const todo = todos.find((todo) => todo.id === id);
 		if (!todo) return;
-		await client.updateTodo(
+		await getApi().updateTodo(
 			{
 				completed: !todo.completed
 			},

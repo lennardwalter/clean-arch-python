@@ -8,14 +8,14 @@
 	import * as Form from '$lib/components/ui/form';
 	import { Input } from '$lib/components/ui/input';
 
-	import { client, schemas } from '$lib/api';
+	import { getApi, schemas } from '$lib/api';
 
 	const form = superForm(defaults(zod(schemas.AuthData)), {
 		SPA: true,
 		validators: zod(schemas.AuthData),
 		onUpdate: async ({ form }) => {
 			if (form.valid) {
-				const result = await client.login(form.data);
+				const result = await getApi().login(form.data);
 				Cookies.set('token', result.access_token);
 				await goto('/');
 			}
