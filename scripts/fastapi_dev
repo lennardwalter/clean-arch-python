@@ -1,0 +1,3 @@
+#!/bin/sh
+
+python -m fastapi_cli dev app/api/server.py
