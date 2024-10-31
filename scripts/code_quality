@@ -2,4 +2,5 @@
 
 isort --check-only --diff . &&
 black --check . &&
-flake8 .
+flake8 . &&
+pyright .
