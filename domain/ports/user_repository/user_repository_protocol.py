@@ -4,7 +4,6 @@ from domain.entities import User
 from domain.extra.result import Result
 from domain.extra.types import UUID4, EmailStr
 
-
 from .user_repository_errors import UserGetByEmailError, UserGetByIdError
 
 

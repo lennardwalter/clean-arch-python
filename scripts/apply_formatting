@@ -1,4 +1,4 @@
 #!/bin/sh
 
-isort . &&
-black .
+python -m isort . &&
+python -m black .
