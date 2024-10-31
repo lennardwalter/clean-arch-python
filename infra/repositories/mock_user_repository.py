@@ -2,14 +2,14 @@ from typing import final
 from uuid import UUID
 
 from domain.entities import User
+from domain.extra.result import Err, Ok, Result
+from domain.extra.types import EmailStr
 from domain.ports.user_repository import (
-    UserRepository,
-    UserNotFoundError,
     UserGetByEmailError,
     UserGetByIdError,
+    UserNotFoundError,
+    UserRepository,
 )
-from domain.extra.types import EmailStr
-from domain.extra.result import *
 
 
 @final

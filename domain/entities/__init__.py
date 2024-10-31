@@ -1,7 +1,6 @@
 from .base_model import EntityBaseModel
-
-from .user import User
 from .todo import Todo
+from .user import User
 
 
 __all__ = [

@@ -1,11 +1,9 @@
+from domain.entities import User
+from domain.extra.result import Result
+from domain.extra.types import UUID4, EmailStr
 from domain.ports.user_repository import UserRepository
 
-
-from domain.entities import User
-from domain.extra.types import UUID4, EmailStr
-from domain.extra.result import Result
-
-from .user_service_errors import UserGetByIdError, UserGetByEmailError
+from .user_service_errors import UserGetByEmailError, UserGetByIdError
 
 
 class UserService:

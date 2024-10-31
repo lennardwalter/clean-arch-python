@@ -1,4 +1,4 @@
-from .shared_errors import UnauthorizedError, RequestingUserNotFoundError
+from .shared_errors import RequestingUserNotFoundError, UnauthorizedError
 
 
 __all__ = [

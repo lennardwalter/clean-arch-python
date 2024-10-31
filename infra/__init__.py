@@ -1,4 +1,4 @@
-from infra.repositories import MockUserRepository, MockTodoRepository
+from infra.repositories import MockTodoRepository, MockUserRepository
 
 
 __all__ = ["MockUserRepository", "MockTodoRepository"]

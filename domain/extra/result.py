@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import Never
-
-from typing import Union
+from typing import Never, Union
 
 
 class Ok[T]:

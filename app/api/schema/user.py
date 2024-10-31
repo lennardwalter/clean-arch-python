@@ -1,4 +1,4 @@
-from domain.extra.types import BaseModelConfig, UUID4, EmailStr
+from domain.extra.types import UUID4, BaseModelConfig, EmailStr
 
 
 class UserResponse(BaseModelConfig):

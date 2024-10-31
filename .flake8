@@ -1,0 +1,4 @@
+[flake8]
+# line too long, multiple statements on one line (def)
+ignore = E501, E704
+exclude = .git,__pycache__,.venv

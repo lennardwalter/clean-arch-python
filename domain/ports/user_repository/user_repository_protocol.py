@@ -1,8 +1,9 @@
 from typing import Protocol
 
 from domain.entities import User
-from domain.extra.types import EmailStr, UUID4
 from domain.extra.result import Result
+from domain.extra.types import UUID4, EmailStr
+
 
 from .user_repository_errors import UserGetByEmailError, UserGetByIdError
 

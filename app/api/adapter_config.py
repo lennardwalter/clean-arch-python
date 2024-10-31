@@ -1,6 +1,7 @@
-from domain.ports import UserRepository, TodoRepository
+from infra import MockTodoRepository, MockUserRepository
 
-from infra import MockUserRepository, MockTodoRepository
+from domain.ports import TodoRepository, UserRepository
+
 
 ADAPTER_CONFIG = {
     UserRepository: MockUserRepository,

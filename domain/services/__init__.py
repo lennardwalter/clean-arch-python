@@ -1,11 +1,10 @@
-from .user_service.user_service_impl import UserService
-
 from .todo_service.todo_service_impl import TodoService
 from .todo_service.todo_service_requests import (
     TodoCreateRequest,
-    TodoUpdateRequest,
     TodoDeleteRequest,
+    TodoUpdateRequest,
 )
+from .user_service.user_service_impl import UserService
 
 
 SERVICES = [UserService, TodoService]

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+isort --check-only --diff . &&
+black --check . &&
+flake8 .

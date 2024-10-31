@@ -1,19 +1,20 @@
 from datetime import datetime, timedelta, timezone
-from typing import Annotated, Optional, Callable, Awaitable, Any
+from typing import Annotated, Any, Awaitable, Callable, Optional
 from uuid import UUID
 
 import jwt
+from fastapi import Depends, HTTPException, Request, status
 from jwt.exceptions import InvalidTokenError
-from fastapi import Depends, HTTPException, status, Request
 from passlib.context import CryptContext
-
-from domain.entities import User
-from domain.extra.types import EmailStr
-from domain.extra.result import *
-from domain.services import UserService
 
 from app.api.core.services import get_service
 from app.api.schema import PasswordStr
+
+from domain.entities import User
+from domain.extra.result import Err, Ok
+from domain.extra.types import EmailStr
+from domain.services import UserService
+
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"

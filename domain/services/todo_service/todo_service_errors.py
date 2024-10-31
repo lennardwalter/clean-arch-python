@@ -1,7 +1,7 @@
 from typing import Union
 
-from domain.services.shared import UnauthorizedError, RequestingUserNotFoundError
 from domain.ports.todo_repository import TodoNotFoundError
+from domain.services.shared import RequestingUserNotFoundError, UnauthorizedError
 
 
 class TodoLimitReachedError:

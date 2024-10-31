@@ -1,6 +1,7 @@
-from .todo import TodoResponse, TodoUpdateRequest, TodoCreateRequest
+from .auth import AuthRequest, PasswordStr, Token
+from .todo import TodoCreateRequest, TodoResponse, TodoUpdateRequest
 from .user import UserResponse
-from .auth import Token, PasswordStr, AuthRequest
+
 
 __all__ = [
     # Todo

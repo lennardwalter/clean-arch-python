@@ -1,7 +1,9 @@
 from typing import Callable, cast
 
 from core.solve_dependencies import solve_services
+
 from app.api.adapter_config import ADAPTER_CONFIG
+
 
 _service_instances = solve_services(ADAPTER_CONFIG)
 

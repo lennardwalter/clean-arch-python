@@ -1,16 +1,16 @@
-from typing import Annotated
 from datetime import timedelta
+from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.api.core.auth import (
     ACCESS_TOKEN_EXPIRE_MINUTES,
+    AuthenticateUserFunctionType,
     create_access_token,
     get_authenticate_user,
-    AuthenticateUserFunctionType,
 )
+from app.api.schema import AuthRequest, Token
 
-from app.api.schema import Token, AuthRequest
 
 router = APIRouter()
 
@@ -35,7 +35,5 @@ async def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": str(user.id)}, expires_delta=access_token_expires
-    )
+    access_token = create_access_token(data={"sub": str(user.id)}, expires_delta=access_token_expires)
     return Token(access_token=access_token, token_type="bearer")

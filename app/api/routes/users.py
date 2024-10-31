@@ -1,25 +1,25 @@
-from typing import Annotated, cast, NoReturn
+from typing import Annotated, NoReturn, cast
 
-from fastapi import APIRouter, HTTPException, Depends, Response
+from fastapi import APIRouter, Depends, HTTPException, Response
 
-from domain.services.todo_service import (
-    TodoService,
-    TodoCreateRequest as ServiceTodoCreateRequest,
-    TodoUpdateRequest as ServiceTodoUpdateRequest,
-    TodoDeleteRequest as ServiceTodoDeleteRequest,
-    TodoNotFoundError,
-    TodoLimitReachedError,
-    UnauthorizedError,
-    RequestingUserNotFoundError,
-)
-from domain.entities import User
-from domain.extra.result import *
-from domain.extra.types import UUID4
-
-
-from app.api.core.services import get_service
 from app.api.core.auth import get_current_user
-from app.api.schema import TodoResponse, TodoUpdateRequest, TodoCreateRequest
+from app.api.core.services import get_service
+from app.api.schema import TodoCreateRequest, TodoResponse, TodoUpdateRequest
+
+from domain.entities import User
+from domain.extra.result import Err, Ok
+from domain.extra.types import UUID4
+from domain.services.todo_service import (
+    RequestingUserNotFoundError,
+    TodoCreateRequest as ServiceTodoCreateRequest,
+    TodoDeleteRequest as ServiceTodoDeleteRequest,
+    TodoLimitReachedError,
+    TodoNotFoundError,
+    TodoService,
+    TodoUpdateRequest as ServiceTodoUpdateRequest,
+    UnauthorizedError,
+)
+
 
 router = APIRouter(responses={401: {"description": "Unauthorized"}})
 

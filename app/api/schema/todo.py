@@ -1,6 +1,6 @@
 from typing import Optional
 
-from domain.extra.types import BaseModelConfig, UUID4
+from domain.extra.types import UUID4, BaseModelConfig
 
 
 class TodoResponse(BaseModelConfig):

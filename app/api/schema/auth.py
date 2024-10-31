@@ -1,5 +1,5 @@
-from typing import Annotated
 from re import compile
+from typing import Annotated
 
 from pydantic import StringConstraints
 
