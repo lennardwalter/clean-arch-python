@@ -21,7 +21,7 @@ from domain.services.todo_service import (
 )
 
 
-router = APIRouter(responses={401: {"description": "Unauthorized"}})
+router = APIRouter()
 
 
 def assert_never(x: NoReturn) -> NoReturn:
@@ -86,7 +86,6 @@ async def create_todo(
     "/@me/todos/{todo_id}",
     responses={
         200: {"description": "Todo updated successfully"},
-        401: {"description": "Unauthorized"},
         404: {"description": "Todo not found"},
         500: {"description": "Internal Server Error"},
     },

@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.routing import APIRoute
+
 
 from app.api.routes import router
-
+from app.api.core.modify_openapi import modify_openapi
 
 CORS_ORIGINS = ["http://localhost:5173"]
 
@@ -24,14 +24,6 @@ def create_app() -> FastAPI:
     return app_
 
 
-def use_route_names_as_op_id(app: FastAPI) -> None:
-    for route in app.routes:
-        if isinstance(route, APIRoute):
-            camel_case_name = "".join(word.capitalize() for word in route.name.split("_"))
-            camel_case_name = camel_case_name[0].lower() + camel_case_name[1:]
-            route.operation_id = camel_case_name
-
-
 app = create_app()
 
-use_route_names_as_op_id(app)
+modify_openapi(app)
