@@ -1,7 +1,8 @@
 from typing import Any
+
 from fastapi import FastAPI
-from fastapi.routing import APIRoute
 from fastapi.openapi.utils import get_openapi
+from fastapi.routing import APIRoute
 
 
 def change_operation_ids(app: FastAPI) -> None:

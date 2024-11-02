@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-
-from app.api.routes import router
 from app.api.core.modify_openapi import modify_openapi
+from app.api.routes import router
+
 
 CORS_ORIGINS = ["http://localhost:5173"]
 
